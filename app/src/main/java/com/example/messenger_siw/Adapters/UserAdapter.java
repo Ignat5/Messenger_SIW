@@ -46,6 +46,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
         }else {
             Glide.with(context).load(user.getImageURL()).into(holder.IV_userImage);
         }
+        //
+        if(user.getStatus().equals("Online")) {
+            holder.TV_username.setTextColor(context.getResources().getColor(R.color.MyGreen));
+        }
+        if(user.getStatus().equals("Offline")) {
+            holder.TV_username.setTextColor(context.getResources().getColor(R.color.MyRed));
+        }
+        //
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

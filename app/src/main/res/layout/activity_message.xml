@@ -11,7 +11,7 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_message"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:textAlignment="textStart"
@@ -23,9 +23,8 @@
 
         <ImageView
             android:id="@+id/IV_message"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginRight="20dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             tools:layout_editor_absoluteX="16dp"
             tools:srcCompat="@tools:sample/avatars" />
 
@@ -41,7 +40,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_message"
         android:layout_width="410dp"
-        android:layout_height="582dp"
+        android:layout_height="570dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintBottom_toTopOf="@+id/RL_message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

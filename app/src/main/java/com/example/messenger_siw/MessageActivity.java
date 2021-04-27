@@ -48,7 +48,8 @@ public class MessageActivity extends AppCompatActivity {
     RecyclerView RV_message;
     MessageAdapter messageAdapter;
     List<Chat> allChats;
-
+    //Listener
+    ValueEventListener seenMessageListener;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +86,7 @@ public class MessageActivity extends AppCompatActivity {
                             .into(IV_userImage);
                 }
                 readMessages(firebaseUser.getUid(),userID,user.getImageURL());
+                //SeenMessage(userID);
             }
 
             @Override
@@ -107,7 +109,7 @@ public class MessageActivity extends AppCompatActivity {
         });
         //написать метод для получения всех сообщений->передать нужные параметры в
         //конструктор адаптера, установить адаптер для RV
-
+        //SeenMessage(userID);
     }
     private void sendMessage(String senderID,String receiverID,String message) {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -115,6 +117,7 @@ public class MessageActivity extends AppCompatActivity {
         hashMap.put("senderID",senderID);
         hashMap.put("receiverID",receiverID);
         hashMap.put("message",message);
+        hashMap.put("isSeen",false);
         databaseReference.child("Chats").push().setValue(hashMap);
 
         DatabaseReference chatReference = FirebaseDatabase.getInstance().getReference("ChatList")
@@ -158,5 +161,49 @@ public class MessageActivity extends AppCompatActivity {
 
             }
         });
+        SeenMessage(userID);
+    }
+
+    //updating user's status
+    private void UpdateStatus(String status) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("MyUsers")
+                .child(firebaseUser.getUid());
+        HashMap<String,Object> hashMap = new HashMap();
+        hashMap.put("status",status);
+        userRef.updateChildren(hashMap);
+    }
+    //seen message
+    private void SeenMessage(String user_id) {
+       databaseReference = FirebaseDatabase.getInstance().getReference("Chats");
+       databaseReference.addValueEventListener(new ValueEventListener() {
+           @Override
+           public void onDataChange(@NonNull DataSnapshot snapshot) {
+               for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Chat chat = dataSnapshot.getValue(Chat.class);
+                    if(chat.getReceiverID().equals(firebaseUser.getUid()) && chat.getSenderID().equals(user_id)) {
+                        HashMap<String,Object> hashMap = new HashMap<>();
+                        hashMap.put("isSeen",true);
+                        dataSnapshot.getRef().updateChildren(hashMap);
+                    }
+               }
+           }
+
+           @Override
+           public void onCancelled(@NonNull DatabaseError error) {
+
+           }
+       });
+    }
+    //
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UpdateStatus("Online");
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //databaseReference.removeEventListener(seenMessageListener);
+        UpdateStatus("Offline");
     }
 }

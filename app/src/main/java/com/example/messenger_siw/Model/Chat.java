@@ -4,13 +4,15 @@ public class Chat {
     private String senderID;
     private String receiverID;
     private String message;
+    private boolean isSeen;
 
     public Chat() {}
 
-    public Chat(String senderID, String receiverID, String message) {
+    public Chat(String senderID, String receiverID, String message,boolean isSeen) {
         this.senderID = senderID;
         this.receiverID = receiverID;
         this.message = message;
+        this.isSeen = isSeen;
     }
 
 
@@ -35,5 +37,13 @@ public class Chat {
     }
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setSeen(boolean seen) {
+        isSeen = seen;
+    }
+
+    public boolean getIsSeen() {
+        return isSeen;
     }
 }

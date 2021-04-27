@@ -55,10 +55,23 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
     public void onBindViewHolder(@NonNull MessageHolder holder, int position) {
         final Chat chat = allChats.get(position);
         holder.TV_message.setText(chat.getMessage());
-        if(imgURL.equals("default")) {
-            holder.IV_profile.setImageResource(R.mipmap.ic_launcher);
-        } else {
-            Glide.with(context).load(imgURL).into(holder.IV_profile);
+        //
+        if(!firebaseUser.getUid().equals(chat.getSenderID())) {
+            if (imgURL.equals("default")) {
+                holder.IV_profile.setImageResource(R.mipmap.ic_launcher);
+            } else {
+                Glide.with(context).load(imgURL).into(holder.IV_profile);
+            }
+        }
+        if(position == allChats.size() - 1) {
+            if (chat.getIsSeen()) {
+                holder.TV_status.setText("Seen");
+            }else {
+                holder.TV_status.setText("Delivered");
+            }
+            //holder.TV_status.setVisibility(View.VISIBLE);
+        }else {
+            holder.TV_status.setVisibility(View.GONE);
         }
     }
 
@@ -71,11 +84,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
 
         public TextView TV_message;
         public ImageView IV_profile;
+        public TextView TV_status;
 
         public MessageHolder(@NonNull View itemView) { //!!!
             super(itemView);
             TV_message = itemView.findViewById(R.id.TV_chat_message);
             IV_profile = itemView.findViewById(R.id.IV_chat_profileImage);
+            TV_status = itemView.findViewById(R.id.TV_message_status);
 
         }
     }

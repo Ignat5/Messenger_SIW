@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:layout_marginBottom="30dp">
+    android:layout_marginBottom="30dp"
+    android:padding="8dp">
 
     <ImageView
         android:id="@+id/IV_chat_profileImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="15dp"
+        android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/TV_chat_message"
@@ -24,6 +25,20 @@
         android:padding="8dp"
         android:text="Message Text"
         android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/TV_message_status"
+        android:layout_width="169dp"
+        android:layout_height="33dp"
+        android:layout_below="@+id/TV_chat_message"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="146dp"
+        android:text="Status"
+        android:textSize="12sp"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

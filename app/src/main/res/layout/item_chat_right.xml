@@ -9,30 +9,36 @@
 
     <RelativeLayout
         android:id="@+id/RL_chat_right"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
-
-    <ImageView
-        android:id="@+id/IV_chat_profileImage"
-        android:src="@mipmap/ic_launcher"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="5dp"
-        android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/TV_chat_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="5dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:background="@drawable/background_message_right"
-        android:padding="8dp"
-        android:text="Message Text"
-        android:textSize="18dp" />
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/TV_chat_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/background_message_right"
+            android:padding="8dp"
+            android:text="Message Text"
+            android:textSize="18dp" />
+
+        <TextView
+            android:id="@+id/TV_message_status"
+            android:layout_width="139dp"
+            android:layout_height="41dp"
+            android:layout_below="@+id/TV_chat_message"
+            android:layout_alignStart="@+id/TV_chat_message"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="2dp"
+            android:text="Status"
+            android:visibility="visible" />
 
     </RelativeLayout>
 

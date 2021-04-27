@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -118,7 +119,26 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return titles.get(position);
         }
-
     }
+    private void UpdateStatus(String status) {
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("MyUsers")
+                .child(firebaseUser.getUid());
+        HashMap<String,Object> hashMap = new HashMap();
+        hashMap.put("status",status);
+        userRef.updateChildren(hashMap);
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        UpdateStatus("Online");
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        UpdateStatus("Offline");
+    }
+
+
+
 
 }
