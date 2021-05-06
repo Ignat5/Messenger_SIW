@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                     hashMapUsers.put("id",userID);
                     hashMapUsers.put("username",username.toString());
                     hashMapUsers.put("imageURL","default");
-                    //hashMapUsers.put("status","Offline");
+                    hashMapUsers.put("status","Offline");
 
                     //Open Main Activity after successful registration
                     databaseReference.setValue(hashMapUsers)
